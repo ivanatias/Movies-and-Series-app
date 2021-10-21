@@ -21,7 +21,7 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar sticky="top" expand="lg" bg="dark" variant="dark">
       <Container>
         <Link to="/" onClick={closeMobileMenu}>
           <h2 className="text-danger" style={{ cursor: "pointer" }}>
