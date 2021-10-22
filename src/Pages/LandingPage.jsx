@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../Layout/Layout";
-import Banner from "../Banner/Banner";
+import Layout from "../components/Layout/Layout";
+import Banner from "../components/Banner/Banner";
 
 const LandingPage = () => {
   return (
