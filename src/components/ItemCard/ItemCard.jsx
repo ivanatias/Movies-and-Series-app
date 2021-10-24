@@ -48,7 +48,7 @@ const ItemCard = ({ item }) => {
               text="white"
               className="position-absolute top-0 end-0 m-1"
             >
-              {item.vote_average}
+              {item.vote_average === 0 ? "Upcoming" : item.vote_average}
             </Badge>
           </Card.Title>
           <div className="d-flex justify-content-between align-items-center">
