@@ -38,6 +38,7 @@ const ItemCard = ({ item }) => {
           src={imageUrl}
           alt={item.title || item.name}
           width={250}
+          height={300}
         />
         <Card.Body>
           <Card.Title as="h6" className="lead text-center mb-4 text-white">
