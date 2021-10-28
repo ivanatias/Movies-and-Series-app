@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { useHistory } from "react-router";
+import { useRouteQuery } from "../../hooks/useRouteQuery";
 
 const Search = ({ type }) => {
-  const [searchText, setSearchText] = useState("");
+  const query = useRouteQuery();
+  const search = query.get("search");
 
   const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push("?search=" + searchText);
   };
 
   return (
@@ -25,8 +26,11 @@ const Search = ({ type }) => {
               placeholder={
                 type === "movie" ? "Search Movie" : "Search TV Serie"
               }
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
+              value={search}
+              onChange={(e) => {
+                const value = e.target.value;
+                history.push("?search=" + value);
+              }}
               autoFocus
             />
           </Form.Group>
