@@ -7,14 +7,14 @@ import Empty from "../Empty/Empty";
 import { useQuery } from "react-query";
 import { getTrendings } from "../../utils/getTrendings";
 
-const TrendingGrid = () => {
-  const { data, status } = useQuery("trendingsweek", () =>
-    getTrendings("/trending/all/week")
+const DailyTrendings = () => {
+  const { data, status } = useQuery("trendingsdaily", () =>
+    getTrendings("/trending/all/day")
   );
 
   return (
-    <Container className="py-5">
-      <h2 className="text-center text-white mb-5">Trendings of the Week</h2>
+    <Container className="py-3">
+      <h2 className="text-center text-white mb-5">Daily Trendings</h2>
       {status === "loading" ? (
         <Loading />
       ) : status === "error" ? (
@@ -33,4 +33,4 @@ const TrendingGrid = () => {
   );
 };
 
-export default TrendingGrid;
+export default DailyTrendings;
