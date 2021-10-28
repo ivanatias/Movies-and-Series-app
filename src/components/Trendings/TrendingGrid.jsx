@@ -2,14 +2,20 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 import ItemCard from "../ItemCard/ItemCard";
 import Loading from "../Loading/Loading";
-import { getData } from "../../utils/getData";
-import { useQuery } from "react-query";
 import Error from "../Error/Error";
 import Empty from "../Empty/Empty";
+/* import { getData } from "../../utils/getData";
+import { useQuery } from "react-query"; */
+import { useFetchData } from "../../hooks/useFetchData";
 
 const TrendingGrid = () => {
-  const { data, isLoading, isError } = useQuery("trendings", () =>
+  /*  const { data, isLoading, isError } = useQuery("trendings", () =>
     getData("/trending/all/week")
+  ); */
+
+  const { data, isLoading, isError } = useFetchData(
+    "/trending/all/week",
+    "trendings"
   );
 
   if (isError) {
