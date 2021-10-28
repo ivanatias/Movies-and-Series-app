@@ -1,13 +1,39 @@
-/* import { useEffect } from "react"; */
-import { useQuery } from "react-query";
+import { useEffect } from "react";
+import { useInfiniteQuery } from "react-query";
 import { getData } from "../utils/getData";
 
 
 export const useFetchData = (endpoint, queryKey, query) => {
 
-    const { data, isLoading, isError } = useQuery([`${queryKey}`, query], () =>
-        getData(endpoint)
+
+
+    const { data, status, isFetchingNextPage, fetchNextPage } = useInfiniteQuery([`${queryKey}`, query], ({ pageParam = 1 }) =>
+        getData(endpoint, pageParam), {
+
+        getNextPageParam: (lastPage, pages) => {
+            if (lastPage.page < lastPage.total_pages) {
+                return lastPage.page + 1;
+            }
+            return undefined;
+        }
+    }
     );
 
-    return { data, isLoading, isError };
+    useEffect(() => {
+        const onScroll = async (event) => {
+            const { scrollHeight, scrollTop, clientHeight } =
+                event.target.scrollingElement;
+            if (scrollHeight - scrollTop <= clientHeight * 1.2) {
+                await fetchNextPage();
+            }
+        };
+
+        document.addEventListener("scroll", onScroll);
+        return () => document.removeEventListener("scroll", onScroll);
+        // eslint-disable-next-line 
+    }, [])
+
+
+
+    return { data, status, isFetchingNextPage };
 }

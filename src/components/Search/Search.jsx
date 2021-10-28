@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { useRouteQuery } from "../../hooks/useRouteQuery";
+import { FaSearch } from "react-icons/fa";
 
 const Search = ({ type }) => {
   const query = useRouteQuery();
@@ -16,7 +17,11 @@ const Search = ({ type }) => {
   return (
     <Row>
       <Col md={6} className="mx-auto mb-4">
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="position-relative">
+          <FaSearch
+            className="position-absolute top-50 end-0 translate-middle text-dark"
+            size="20"
+          />
           <Form.Group
             className="mb-3"
             controlId={type === "movie" ? "Search Movie" : "Search TV Serie"}
@@ -26,12 +31,13 @@ const Search = ({ type }) => {
               placeholder={
                 type === "movie" ? "Search Movie" : "Search TV Serie"
               }
-              value={search}
+              value={search || ""}
               onChange={(e) => {
                 const value = e.target.value;
                 history.push("?search=" + value);
               }}
               autoFocus
+              aria-label={type === "movie" ? "Search Movie" : "Search TV Serie"}
             />
           </Form.Group>
         </Form>

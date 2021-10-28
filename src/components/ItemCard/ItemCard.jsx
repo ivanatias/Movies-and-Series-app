@@ -27,6 +27,10 @@ const ItemCard = ({ item }) => {
     if (item.first_air_date) {
       return item.first_air_date.substr(0, 4);
     }
+
+    if (!item.release_date || !item.first_air_date) {
+      return "No date info";
+    }
   };
 
   return (
@@ -41,7 +45,7 @@ const ItemCard = ({ item }) => {
           height={300}
         />
         <Card.Body>
-          <Card.Title as="h6" className="lead text-center mb-4 text-white">
+          <Card.Title as="h6" className="text-center mb-3 text-white">
             {item.title || item.name}
             <Badge
               pill
@@ -49,7 +53,7 @@ const ItemCard = ({ item }) => {
               text="white"
               className="position-absolute top-0 end-0 m-1"
             >
-              {item.vote_average === 0 ? "Upcoming" : item.vote_average}
+              {item.vote_average === 0 ? "No rating" : item.vote_average}
             </Badge>
           </Card.Title>
           <div className="d-flex justify-content-between align-items-center">

@@ -5,7 +5,7 @@ const Error = () => {
   return (
     <div className="d-flex justify-content-center text-white lead">
       <MdDangerous size="30" className="text-danger mx-2" />
-      Whoops, something went wrong
+      Whoops, something went wrong! Please try again
     </div>
   );
 };

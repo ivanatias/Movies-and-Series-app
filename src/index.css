@@ -5,3 +5,7 @@ a {
 html {
   scroll-behavior: smooth;
 }
+
+input {
+  padding-right: 2.5rem !important;
+}
