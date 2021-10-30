@@ -10,7 +10,7 @@ import { useFetchData } from "../../hooks/useFetchData";
 const MoviesGrid = ({ search }) => {
   const endpoint = search
     ? "/search/movie?query=" + search
-    : "/discover/movie?";
+    : "/discover/movie?sort_by=popularity.desc";
 
   const { data, status, isFetchingNextPage } = useFetchData(
     endpoint,

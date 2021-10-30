@@ -5,15 +5,15 @@ import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
 import Empty from "../Empty/Empty";
 import { useQuery } from "react-query";
-import { getTrendings } from "../../utils/getTrendings";
+import { getData } from "../../utils/getData";
 
 const DailyTrendings = () => {
   const { data, status } = useQuery("trendingsdaily", () =>
-    getTrendings("/trending/all/day")
+    getData("/trending/all/day")
   );
 
   return (
-    <Container className="py-3">
+    <Container className="pb-5">
       <h2 className="text-center text-white mb-5">Daily Trendings</h2>
       {status === "loading" ? (
         <Loading />

@@ -5,11 +5,11 @@ import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
 import Empty from "../Empty/Empty";
 import { useQuery } from "react-query";
-import { getTrendings } from "../../utils/getTrendings";
+import { getData } from "../../utils/getData";
 
 const TrendingGrid = () => {
   const { data, status } = useQuery("trendingsweek", () =>
-    getTrendings("/trending/all/week")
+    getData("/trending/all/week")
   );
 
   return (

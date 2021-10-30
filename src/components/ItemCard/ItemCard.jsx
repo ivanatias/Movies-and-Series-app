@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import DetailsModal from "../Details/DetailsModal";
 import { Badge, Card, Col } from "react-bootstrap";
 import { getImage } from "../../utils/getImage";
 import "./ItemCard.css";
 
 const ItemCard = ({ item }) => {
   const imageUrl = getImage(item.poster_path, 300);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
 
   const checkItemPopularity = () => {
     //Changes badge color depending on rating
@@ -29,13 +34,13 @@ const ItemCard = ({ item }) => {
     }
 
     if (!item.release_date || !item.first_air_date) {
-      return "No date info";
+      return "No release date info";
     }
   };
 
   return (
     <Col sm={6} md={4} lg={3}>
-      <Card className="item-card mx-auto">
+      <Card className="item-card mx-auto" onClick={handleShow}>
         <Card.Img
           className="img-fluid mx-auto item-image rounded position-relative"
           variant="top"
@@ -64,6 +69,11 @@ const ItemCard = ({ item }) => {
           </div>
         </Card.Body>
       </Card>
+      <DetailsModal
+        item={item}
+        showModal={showModal}
+        handleClose={handleClose}
+      />
     </Col>
   );
 };
