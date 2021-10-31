@@ -16,7 +16,7 @@ const Search = ({ type }) => {
 
   return (
     <Row>
-      <Col md={6} className="mx-auto mb-4">
+      <Col md={6} className="mx-auto mb-1">
         <Form onSubmit={handleSubmit} className="position-relative">
           <FaSearch
             className="position-absolute top-50 end-0 translate-middle text-dark"
@@ -36,7 +36,6 @@ const Search = ({ type }) => {
                 const value = e.target.value;
                 history.push("?search=" + value);
               }}
-              autoFocus
               aria-label={type === "movie" ? "Search Movie" : "Search TV Serie"}
             />
           </Form.Group>

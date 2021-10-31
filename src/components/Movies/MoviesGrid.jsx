@@ -1,27 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import Empty from "../Empty/Empty";
 import Error from "../Error/Error";
 import Loading from "../Loading/Loading";
 import ItemCard from "../ItemCard/ItemCard";
 import Search from "../Search/Search";
+import Genres from "../Genres/Genres";
 import { useFetchData } from "../../hooks/useFetchData";
+import { useGenres } from "../../hooks/useGenres";
 
 const MoviesGrid = ({ search }) => {
+  const [selectedGenres, setSelectedGenres] = useState([]);
+
+  const genresForUrl = useGenres(selectedGenres);
+
   const endpoint = search
     ? "/search/movie?query=" + search
-    : "/discover/movie?sort_by=popularity.desc";
+    : `/discover/movie?sort_by=popularity.desc&with_genres=${genresForUrl}`;
 
   const { data, status, isFetchingNextPage } = useFetchData(
     endpoint,
     "movies",
-    search
+    search,
+    genresForUrl
   );
 
   return (
     <Container className="py-5">
       <h2 className="text-center text-white mb-3">Movies</h2>
       <Search type="movie" />
+      {!search && (
+        <Genres
+          type="movie"
+          selectedGenres={selectedGenres}
+          setSelectedGenres={setSelectedGenres}
+        />
+      )}
       {status === "loading" ? (
         <Loading />
       ) : status === "error" ? (

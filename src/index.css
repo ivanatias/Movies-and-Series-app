@@ -17,3 +17,8 @@ input {
 .carousel-item__img {
   border-radius: 1rem;
 }
+
+.genres-badge {
+  cursor: pointer;
+  font-size: 0.8rem !important;
+}

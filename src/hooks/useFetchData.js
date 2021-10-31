@@ -3,11 +3,11 @@ import { useInfiniteQuery } from "react-query";
 import { getInfiniteData } from "../utils/getInfiniteData";
 
 
-export const useFetchData = (endpoint, queryKey, query) => {
+export const useFetchData = (endpoint, queryKey, query1, query2) => {
 
 
 
-    const { data, status, isFetchingNextPage, fetchNextPage } = useInfiniteQuery([`${queryKey}`, query], ({ pageParam = 1 }) =>
+    const { data, status, isFetchingNextPage, fetchNextPage } = useInfiniteQuery([`${queryKey}`, query1, query2], ({ pageParam = 1 }) =>
         getInfiniteData(endpoint, pageParam), {
 
         getNextPageParam: (lastPage, pages) => {
