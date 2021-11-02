@@ -10,12 +10,9 @@ input {
   padding-right: 2.5rem !important;
 }
 
-.carousel-item {
-  object-fit: contain;
-}
-
 .carousel-item__img {
   border-radius: 1rem;
+  object-fit: cover;
 }
 
 .genres-badge {

@@ -7,9 +7,15 @@ const Genres = ({ type, selectedGenres, setSelectedGenres }) => {
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
-    getData(`/genre/${type}/list`).then((data) => setGenres(data.genres));
+    let isMounted = true;
 
-    return () => setGenres([]);
+    getData(`/genre/${type}/list`).then((data) => {
+      if (isMounted) setGenres(data.genres);
+    });
+
+    return () => {
+      isMounted = false;
+    };
     // eslint-disable-next-line
   }, []);
 

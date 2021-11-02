@@ -32,7 +32,7 @@ const Cast = ({ id, movieOrTv }) => {
         >
           {data.cast.map((person) => (
             <div
-              className="d-flex flex-column align-items-center carousel-item"
+              className="d-flex flex-column align-items-center"
               key={person.id}
             >
               <img
