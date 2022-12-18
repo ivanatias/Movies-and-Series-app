@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import DetailsModal from "../Details/DetailsModal";
 import { Badge, Card, Col } from "react-bootstrap";
 import { getImage } from "../../utils/getImage";
+import {
+  trimReleaseDate,
+  pickRatingBadgeColor,
+  trimRatingPoints,
+} from "../../utils/helpers";
 import "./ItemCard.css";
 
 const ItemCard = ({ item }) => {
@@ -11,32 +16,9 @@ const ItemCard = ({ item }) => {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-  const checkItemPopularity = () => {
-    //Changes badge color depending on rating
-    if (item.vote_average <= 5) {
-      return "danger";
-    }
-    if (item.vote_average < 8) {
-      return "warning";
-    }
-    if (item.vote_average >= 8) {
-      return "success";
-    }
-  };
-
-  const checkMovieOrTv = () => {
-    //Checks if there is a release date (it's a movie) or a first air date (it's a tv series)
-    if (item.release_date) {
-      return item.release_date.substr(0, 4);
-    }
-    if (item.first_air_date) {
-      return item.first_air_date.substr(0, 4);
-    }
-
-    if (!item.release_date || !item.first_air_date) {
-      return "No release date info";
-    }
-  };
+  const releaseDate = trimReleaseDate(item.release_date ?? item.first_air_date);
+  const badgeColor = pickRatingBadgeColor(item.vote_average);
+  const ratingPoints = trimRatingPoints(item.vote_average);
 
   return (
     <Col sm={6} md={4} lg={3}>
@@ -54,18 +36,18 @@ const ItemCard = ({ item }) => {
             {item.title || item.name}
             <Badge
               pill
-              bg={checkItemPopularity()}
+              bg={badgeColor}
               text="white"
               className="position-absolute top-0 end-0 m-1"
             >
-              {item.vote_average === 0 ? "No rating" : item.vote_average}
+              {ratingPoints}
             </Badge>
           </Card.Title>
           <div className="d-flex justify-content-between align-items-center">
             <span className="text-dark">
               {item.media_type && item.media_type.toUpperCase()}
             </span>
-            <span className="text-dark">{checkMovieOrTv()}</span>
+            <span className="text-dark">{releaseDate}</span>
           </div>
         </Card.Body>
       </Card>
