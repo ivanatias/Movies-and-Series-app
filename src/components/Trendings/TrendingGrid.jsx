@@ -4,11 +4,11 @@ import ItemCard from '../ItemCard/ItemCard'
 import Loading from '../Loading/Loading'
 import Error from '../Error/Error'
 import Empty from '../Empty/Empty'
-import { useQuery } from 'react-query'
 import { getData } from '../../utils/getData'
+import { useQuery } from '@tanstack/react-query'
 
 const TrendingGrid = () => {
-  const { data, status } = useQuery('trendingsweek', () =>
+  const { data, status } = useQuery(['trendingsweek'], () =>
     getData('/trending/all/week')
   )
 

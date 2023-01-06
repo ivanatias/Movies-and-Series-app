@@ -1,14 +1,14 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
-import ItemCard from '../ItemCard/ItemCard'
 import Loading from '../Loading/Loading'
 import Error from '../Error/Error'
-import Empty from '../Empty/Empty'
-import { useQuery } from 'react-query'
 import { getData } from '../../utils/getData'
+import { useQuery } from '@tanstack/react-query'
+import ItemCard from '../ItemCard/ItemCard'
+import Empty from '../Empty/Empty'
 
 const DailyTrendings = () => {
-  const { data, status } = useQuery('trendingsdaily', () =>
+  const { data, status } = useQuery(['trendingsdaily'], () =>
     getData('/trending/all/day')
   )
 
