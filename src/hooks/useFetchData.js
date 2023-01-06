@@ -5,7 +5,8 @@ import { getInfiniteData } from '../utils/getInfiniteData'
 export const useFetchData = (endpoint, queryKey, query1, query2) => {
   const { data, status, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
     [`${queryKey}`, query1, query2],
-    ({ pageParam = 1 }) => getInfiniteData(endpoint, pageParam),
+    ({ pageParam: page = 1, signal }) =>
+      getInfiniteData({ endpoint, page, signal }),
     {
       getNextPageParam: lastPage => {
         if (lastPage.page < lastPage.total_pages) {
