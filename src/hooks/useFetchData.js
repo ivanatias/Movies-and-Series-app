@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { getInfiniteData } from '../utils/getInfiniteData'
 
 export const useFetchData = (endpoint, queryKey, query1, query2) => {
@@ -7,7 +7,7 @@ export const useFetchData = (endpoint, queryKey, query1, query2) => {
     [`${queryKey}`, query1, query2],
     ({ pageParam = 1 }) => getInfiniteData(endpoint, pageParam),
     {
-      getNextPageParam: (lastPage, pages) => {
+      getNextPageParam: lastPage => {
         if (lastPage.page < lastPage.total_pages) {
           return lastPage.page + 1
         }
