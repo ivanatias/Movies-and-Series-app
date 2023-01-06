@@ -2,9 +2,9 @@ import React from 'react'
 import { useFetchDetails } from '../../hooks/useFetchDetails'
 import { Button } from 'react-bootstrap'
 
-const Video = ({ id, movieOrTv }) => {
+const Video = ({ id, itemType }) => {
   const endpoint =
-    movieOrTv === 'movie' ? `/movie/${id}/videos?` : `/tv/${id}/videos?`
+    itemType === 'movie' ? `/movie/${id}/videos?` : `/tv/${id}/videos?`
 
   const { data } = useFetchDetails(endpoint, 'videos', id)
 

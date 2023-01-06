@@ -5,9 +5,9 @@ import { useFetchDetails } from '../../hooks/useFetchDetails'
 import { getPersonImage } from '../../utils/getPersonImage'
 import 'react-alice-carousel/lib/alice-carousel.css'
 
-const Cast = ({ id, movieOrTv }) => {
+const Cast = ({ id, itemType }) => {
   const endpoint =
-    movieOrTv === 'movie' ? `/movie/${id}/credits?` : `/tv/${id}/credits?`
+    itemType === 'movie' ? `/movie/${id}/credits?` : `/tv/${id}/credits?`
 
   const { data, status } = useFetchDetails(endpoint, 'credits', id)
 
@@ -24,9 +24,9 @@ const Cast = ({ id, movieOrTv }) => {
       {data && data.cast.length !== 0 ? (
         <AliceCarousel
           responsive={responsive}
-          autoPlay={data.cast.length <= 1 ? false : true}
+          autoPlay={data.cast.length <= 1}
           autoPlayInterval={1500}
-          infinite={data.cast.length <= 1 ? false : true}
+          infinite={data.cast.length <= 1}
           disableButtonsControls={true}
           disableDotsControls={true}
         >

@@ -12,7 +12,7 @@ const DetailsModal = ({ item, showModal, handleClose }) => {
       </Modal.Header>
       <Modal.Body>
         <Container>
-          <Info item={item} movieOrTv={itemType} />
+          <Info item={item} itemType={itemType} />
         </Container>
       </Modal.Body>
     </Modal>

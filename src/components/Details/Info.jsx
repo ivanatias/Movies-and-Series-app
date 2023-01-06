@@ -7,11 +7,11 @@ import { Row, Col } from 'react-bootstrap'
 import { useFetchDetails } from '../../hooks/useFetchDetails'
 import { getImage } from '../../utils/getImage'
 
-const Info = ({ item, movieOrTv }) => {
+const Info = ({ item, itemType }) => {
   const imageUrl = getImage(item.poster_path, 500)
 
   const endpoint =
-    movieOrTv === 'movie' ? `/movie/${item.id}?` : `/tv/${item.id}?`
+    itemType === 'movie' ? `/movie/${item.id}?` : `/tv/${item.id}?`
 
   const { data, status } = useFetchDetails(endpoint, 'details', item.id)
 
@@ -73,12 +73,12 @@ const Info = ({ item, movieOrTv }) => {
       <Row className='g-3 mx-auto pt-5'>
         <h3 className='text-center'>Cast:</h3>
         <Col>
-          <Cast id={item.id} movieOrTv={movieOrTv} />
+          <Cast id={item.id} itemType={itemType} />
         </Col>
       </Row>
       <Row className='g-3 mx-auto pt-5'>
         <Col>
-          <Video id={item.id} movieOrTv={movieOrTv} />
+          <Video id={item.id} itemType={itemType} />
         </Col>
       </Row>
     </>
