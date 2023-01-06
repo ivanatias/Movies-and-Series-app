@@ -9,10 +9,8 @@ export const useFetchData = (endpoint, queryKey, query1, query2) => {
       getInfiniteData({ endpoint, page, signal }),
     {
       getNextPageParam: lastPage => {
-        if (lastPage.page < lastPage.total_pages) {
-          return lastPage.page + 1
-        }
-        return undefined
+        const { page, total_pages: totalPages } = lastPage
+        return page < totalPages ? page + 1 : undefined
       }
     }
   )
