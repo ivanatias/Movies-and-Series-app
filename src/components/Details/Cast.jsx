@@ -8,8 +8,9 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 
 const CAROUSEL_CONFIG = {
   0: { items: 1 },
-  512: { items: 2 },
-  1024: { items: 4 }
+  768: { items: 2 },
+  1000: { items: 3 },
+  1400: { items: 4 }
 }
 
 const Cast = ({ id, itemType }) => {
@@ -25,9 +26,9 @@ const Cast = ({ id, itemType }) => {
       {data && data.cast.length !== 0 ? (
         <AliceCarousel
           responsive={CAROUSEL_CONFIG}
-          autoPlay={data.cast.length <= 1}
+          autoPlay={data.cast.length >= 1}
           autoPlayInterval={1500}
-          infinite={data.cast.length <= 1}
+          infinite
           disableButtonsControls={true}
           disableDotsControls={true}
         >
