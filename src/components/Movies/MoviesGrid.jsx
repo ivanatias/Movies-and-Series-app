@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Container, Row } from 'react-bootstrap'
-import Empty from '../Empty/Empty'
+import Grid from '../Grid/Grid'
+import { Container } from 'react-bootstrap'
 import Error from '../Error/Error'
 import Loading from '../Loading/Loading'
-import ItemCard from '../ItemCard/ItemCard'
 import Search from '../Search/Search'
 import Genres from '../Genres/Genres'
 import { useFetchData } from '../../hooks/useFetchData'
@@ -43,12 +42,7 @@ const MoviesGrid = ({ search }) => {
       ) : (
         data?.pages.map((page, index) => (
           <React.Fragment key={index}>
-            <Row className='g-4 mx-auto'>
-              {page.results.map(item => (
-                <ItemCard item={item} key={item.id} />
-              ))}
-              {page.results.length === 0 && <Empty />}
-            </Row>
+            <Grid gridItems={page.results} />
           </React.Fragment>
         ))
       )}

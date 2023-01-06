@@ -1,11 +1,10 @@
 import React from 'react'
-import { Container, Row } from 'react-bootstrap'
+import Grid from '../Grid/Grid'
+import { Container } from 'react-bootstrap'
 import Loading from '../Loading/Loading'
 import Error from '../Error/Error'
 import { getData } from '../../utils/getData'
 import { useQuery } from '@tanstack/react-query'
-import ItemCard from '../ItemCard/ItemCard'
-import Empty from '../Empty/Empty'
 
 const DailyTrendings = () => {
   const { data, status } = useQuery(['trendingsdaily'], () =>
@@ -20,14 +19,7 @@ const DailyTrendings = () => {
       ) : status === 'error' ? (
         <Error />
       ) : (
-        data && (
-          <Row className='g-4 mx-auto'>
-            {data?.results.map(item => (
-              <ItemCard item={item} key={item.id} />
-            ))}
-            {data.results.length === 0 && <Empty />}
-          </Row>
-        )
+        <Grid gridItems={data.results} />
       )}
     </Container>
   )
