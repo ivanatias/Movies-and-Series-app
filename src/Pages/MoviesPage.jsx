@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../components/Layout/Layout'
 import MoviesGrid from '../components/Movies/MoviesGrid'
 import { useRouteQuery } from '../hooks/useRouteQuery'
 import { useDebounce } from '../hooks/useDebounce'
@@ -10,11 +9,7 @@ const MoviesPage = () => {
 
   const debouncedSearch = useDebounce(search, 500)
 
-  return (
-    <Layout>
-      <MoviesGrid key={debouncedSearch} search={debouncedSearch} />
-    </Layout>
-  )
+  return <MoviesGrid key={debouncedSearch} search={debouncedSearch} />
 }
 
 export default MoviesPage
