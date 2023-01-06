@@ -1,15 +1,15 @@
 import React from 'react'
 import TVGrid from '../components/TV/TVGrid'
-/* import { useRouteQuery } from '../hooks/useRouteQuery'
-import { useDebounce } from '../hooks/useDebounce' */
+import { useDebounce } from '../hooks/useDebounce'
+import { useSearchParams } from 'react-router-dom'
 
 const SeriesPage = () => {
-  /*   const query = useRouteQuery()
-  const search = query.get('search')
+  const [searchParams] = useSearchParams()
+  const search = searchParams.get('search')
 
-  const debouncedSearch = useDebounce(search, 500) */
+  const debouncedSearch = useDebounce(search, 500)
 
-  return <TVGrid />
+  return <TVGrid search={debouncedSearch} />
 }
 
 export default SeriesPage

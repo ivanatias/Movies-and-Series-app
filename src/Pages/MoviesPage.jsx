@@ -1,15 +1,15 @@
 import React from 'react'
 import MoviesGrid from '../components/Movies/MoviesGrid'
-/* import { useRouteQuery } from '../hooks/useRouteQuery'
- import { useDebounce } from '../hooks/useDebounce' */
+import { useDebounce } from '../hooks/useDebounce'
+import { useSearchParams } from 'react-router-dom'
 
 const MoviesPage = () => {
-  /*   const query = useRouteQuery()
-  const search = query.get('search') */
+  const [searchParams] = useSearchParams()
+  const search = searchParams.get('search')
 
-  /*   const debouncedSearch = useDebounce(search, 500)
-   */
-  return <MoviesGrid />
+  const debouncedSearch = useDebounce(search, 500)
+
+  return <MoviesGrid search={debouncedSearch} />
 }
 
 export default MoviesPage
