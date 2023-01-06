@@ -1,23 +1,23 @@
-import React from "react";
-import AliceCarousel from "react-alice-carousel";
-import Loading from "../Loading/Loading";
-import { useFetchDetails } from "../../hooks/useFetchDetails";
-import { getPersonImage } from "../../utils/getPersonImage";
-import "react-alice-carousel/lib/alice-carousel.css";
+import React from 'react'
+import AliceCarousel from 'react-alice-carousel'
+import Loading from '../Loading/Loading'
+import { useFetchDetails } from '../../hooks/useFetchDetails'
+import { getPersonImage } from '../../utils/getPersonImage'
+import 'react-alice-carousel/lib/alice-carousel.css'
 
 const Cast = ({ id, movieOrTv }) => {
   const endpoint =
-    movieOrTv === "movie" ? `/movie/${id}/credits?` : `/tv/${id}/credits?`;
+    movieOrTv === 'movie' ? `/movie/${id}/credits?` : `/tv/${id}/credits?`
 
-  const { data, status } = useFetchDetails(endpoint, "credits", id);
+  const { data, status } = useFetchDetails(endpoint, 'credits', id)
 
   const responsive = {
     0: { items: 1 },
     512: { items: 2 },
-    1024: { items: 4 },
-  };
+    1024: { items: 4 }
+  }
 
-  return status === "loading" ? (
+  return status === 'loading' ? (
     <Loading />
   ) : (
     <>
@@ -30,9 +30,9 @@ const Cast = ({ id, movieOrTv }) => {
           disableButtonsControls={true}
           disableDotsControls={true}
         >
-          {data.cast.map((person) => (
+          {data.cast.map(person => (
             <div
-              className="d-flex flex-column align-items-center"
+              className='d-flex flex-column align-items-center'
               key={person.id}
             >
               <img
@@ -40,17 +40,17 @@ const Cast = ({ id, movieOrTv }) => {
                 alt={person.name}
                 width={250}
                 height={250}
-                className="mb-2 pe-2 carousel-item__img"
+                className='mb-2 pe-2 carousel-item__img'
               />
-              <p className="text-white">{person.name}</p>
+              <p className='text-white'>{person.name}</p>
             </div>
           ))}
         </AliceCarousel>
       ) : (
-        <p className="text-center lead">Cast is not available</p>
+        <p className='text-center lead'>Cast is not available</p>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Cast;
+export default Cast

@@ -1,28 +1,28 @@
-import React from "react";
-import { Container, Row } from "react-bootstrap";
-import ItemCard from "../ItemCard/ItemCard";
-import Loading from "../Loading/Loading";
-import Error from "../Error/Error";
-import Empty from "../Empty/Empty";
-import { useQuery } from "react-query";
-import { getData } from "../../utils/getData";
+import React from 'react'
+import { Container, Row } from 'react-bootstrap'
+import ItemCard from '../ItemCard/ItemCard'
+import Loading from '../Loading/Loading'
+import Error from '../Error/Error'
+import Empty from '../Empty/Empty'
+import { useQuery } from 'react-query'
+import { getData } from '../../utils/getData'
 
 const TrendingGrid = () => {
-  const { data, status } = useQuery("trendingsweek", () =>
-    getData("/trending/all/week")
-  );
+  const { data, status } = useQuery('trendingsweek', () =>
+    getData('/trending/all/week')
+  )
 
   return (
-    <Container className="py-5">
-      <h2 className="text-center text-white mb-5">Trendings of the Week</h2>
-      {status === "loading" ? (
+    <Container className='py-5'>
+      <h2 className='text-center text-white mb-5'>Trendings of the Week</h2>
+      {status === 'loading' ? (
         <Loading />
-      ) : status === "error" ? (
+      ) : status === 'error' ? (
         <Error />
       ) : (
         data && (
-          <Row className="g-4 mx-auto">
-            {data?.results.map((item) => (
+          <Row className='g-4 mx-auto'>
+            {data?.results.map(item => (
               <ItemCard item={item} key={item.id} />
             ))}
             {data.results.length === 0 && <Empty />}
@@ -30,7 +30,7 @@ const TrendingGrid = () => {
         )
       )}
     </Container>
-  );
-};
+  )
+}
 
-export default TrendingGrid;
+export default TrendingGrid

@@ -1,5 +1,5 @@
-import React from "react";
-import Navigation from "../Nav/Navigation";
+import React from 'react'
+import Navigation from '../Nav/Navigation'
 
 const Layout = ({ children }) => {
   return (
@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
       <Navigation />
       <main>{children}</main>
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
