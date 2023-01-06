@@ -7,6 +7,7 @@ import {
   pickRatingBadgeColor,
   trimRatingPoints
 } from '../../utils/helpers'
+import moviePlaceholder from '../../images/movieplaceholder.png'
 import './ItemCard.css'
 
 const ItemCard = ({ item }) => {
@@ -26,7 +27,7 @@ const ItemCard = ({ item }) => {
         <Card.Img
           className='img-fluid mx-auto item-image rounded position-relative'
           variant='top'
-          src={imageUrl}
+          src={imageUrl ?? moviePlaceholder}
           alt={item.title || item.name}
           width={250}
           height={300}

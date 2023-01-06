@@ -2,8 +2,15 @@ import React from 'react'
 import AliceCarousel from 'react-alice-carousel'
 import Loading from '../Loading/Loading'
 import { useFetchDetails } from '../../hooks/useFetchDetails'
-import { getPersonImage } from '../../utils/getPersonImage'
+import { getImage } from '../../utils/getImage'
+import personplaceholder from '../../images/personplaceholder.png'
 import 'react-alice-carousel/lib/alice-carousel.css'
+
+const CAROUSEL_CONFIG = {
+  0: { items: 1 },
+  512: { items: 2 },
+  1024: { items: 4 }
+}
 
 const Cast = ({ id, itemType }) => {
   const endpoint =
@@ -11,19 +18,13 @@ const Cast = ({ id, itemType }) => {
 
   const { data, status } = useFetchDetails(endpoint, 'credits', id)
 
-  const responsive = {
-    0: { items: 1 },
-    512: { items: 2 },
-    1024: { items: 4 }
-  }
-
   return status === 'loading' ? (
     <Loading />
   ) : (
     <>
       {data && data.cast.length !== 0 ? (
         <AliceCarousel
-          responsive={responsive}
+          responsive={CAROUSEL_CONFIG}
           autoPlay={data.cast.length <= 1}
           autoPlayInterval={1500}
           infinite={data.cast.length <= 1}
@@ -36,7 +37,7 @@ const Cast = ({ id, itemType }) => {
               key={person.id}
             >
               <img
-                src={getPersonImage(person.profile_path, 300)}
+                src={getImage(person.profile_path, 300) ?? personplaceholder}
                 alt={person.name}
                 width={250}
                 height={250}
