@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../components/Layout/Layout'
 import LandingPage from '../Pages/LandingPage'
 import MoviesPage from '../Pages/MoviesPage'
-// import SeriesPage from '../Pages/SeriesPage'
+import SeriesPage from '../Pages/SeriesPage'
 
 const router = createBrowserRouter([
   {
@@ -17,12 +17,12 @@ const router = createBrowserRouter([
       {
         path: 'movies',
         element: <MoviesPage />
-      }
-      /*  
+      },
+
       {
         path: 'tvseries',
         element: <SeriesPage />
-      } */
+      }
     ]
   }
 ])
