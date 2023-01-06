@@ -5,8 +5,9 @@ import { getInfiniteData } from '../utils/getInfiniteData'
 export const useFetchData = (endpoint, queryKey, query1, query2) => {
   const { data, status, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
     [`${queryKey}`, query1, query2],
-    ({ pageParam: page = 1, signal }) =>
-      getInfiniteData({ endpoint, page, signal }),
+    ({ pageParam: page = 1, signal }) => {
+      return getInfiniteData({ endpoint, page, signal })
+    },
     {
       getNextPageParam: lastPage => {
         const { page, total_pages: totalPages } = lastPage
@@ -17,8 +18,7 @@ export const useFetchData = (endpoint, queryKey, query1, query2) => {
 
   useEffect(() => {
     const onScroll = async event => {
-      const { scrollHeight, scrollTop, clientHeight } =
-        event.target.scrollingElement
+      const { scrollHeight, scrollTop, clientHeight } = event.target.scrollingElement
       if (scrollHeight - scrollTop <= clientHeight * 1.2) {
         await fetchNextPage()
       }
