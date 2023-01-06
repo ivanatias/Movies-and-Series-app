@@ -1,11 +1,14 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 import Navigation from '../Nav/Navigation'
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <>
       <Navigation />
-      <main>{children}</main>
+      <main>
+        <Outlet />
+      </main>
     </>
   )
 }
