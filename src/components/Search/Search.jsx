@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Row, Col, Form } from 'react-bootstrap'
 import { FaSearch } from 'react-icons/fa'
 import { useSearchParams } from 'react-router-dom'
 
 const Search = ({ type }) => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const searchValue = searchParams.get('search')
+  const [, setSearchParams] = useSearchParams()
+
+  useEffect(() => {
+    const params = new URLSearchParams()
+    if (params.get('search') === null) setSearchParams({})
+  }, [])
 
   const handleSubmit = e => {
     e.preventDefault()
   }
 
-  const handleSearch = ({ target }) => setSearchParams({ search: target.value })
+  const handleSearch = ({ target }) => {
+    target.value === ''
+      ? setSearchParams({})
+      : setSearchParams({ search: target.value })
+  }
 
   return (
     <Row>
@@ -30,7 +38,6 @@ const Search = ({ type }) => {
               placeholder={
                 type === 'movie' ? 'Search Movie' : 'Search TV Serie'
               }
-              value={searchValue}
               onChange={handleSearch}
               aria-label={type === 'movie' ? 'Search Movie' : 'Search TV Serie'}
             />
