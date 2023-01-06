@@ -1,18 +1,17 @@
 import React from 'react'
 import { Row, Col, Form } from 'react-bootstrap'
-import { useHistory } from 'react-router'
-import { useRouteQuery } from '../../hooks/useRouteQuery'
 import { FaSearch } from 'react-icons/fa'
+import { useSearchParams } from 'react-router-dom'
 
 const Search = ({ type }) => {
-  const query = useRouteQuery()
-  const search = query.get('search')
-
-  const history = useHistory()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const searchValue = searchParams.get('search')
 
   const handleSubmit = e => {
     e.preventDefault()
   }
+
+  const handleSearch = ({ target }) => setSearchParams({ search: target.value })
 
   return (
     <Row>
@@ -31,11 +30,8 @@ const Search = ({ type }) => {
               placeholder={
                 type === 'movie' ? 'Search Movie' : 'Search TV Serie'
               }
-              value={search || ''}
-              onChange={e => {
-                const value = e.target.value
-                history.push('?search=' + value)
-              }}
+              value={searchValue}
+              onChange={handleSearch}
               aria-label={type === 'movie' ? 'Search Movie' : 'Search TV Serie'}
             />
           </Form.Group>
