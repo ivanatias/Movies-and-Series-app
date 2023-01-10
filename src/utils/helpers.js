@@ -30,9 +30,18 @@ const getMoviesEndpoint = ({ genres = '', searchQuery }) => {
   return `/search/movie?query=${searchQuery}`
 }
 
+const getTVEndpoint = ({ genres = '', searchQuery }) => {
+  if (!searchQuery) {
+    return `/discover/tv?sort_by=popularity.desc&with_genres=${genres}`
+  }
+
+  return `/search/tv?query=${searchQuery}`
+}
+
 export {
   trimReleaseDate,
   pickRatingBadgeColor,
   trimRatingPoints,
-  getMoviesEndpoint
+  getMoviesEndpoint,
+  getTVEndpoint
 }

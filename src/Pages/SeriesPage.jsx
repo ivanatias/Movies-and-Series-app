@@ -5,10 +5,11 @@ import Loading from '../components/Loading/Loading'
 import Search from '../components/Search/Search'
 import Genres from '../components/Genres/Genres'
 import { Container } from 'react-bootstrap'
+import { useLoaderData } from 'react-router-dom'
 import { useFetchData } from '../hooks/useFetchData'
 import { useGenres } from '../hooks/useGenres'
 import { getInfiniteData } from '../utils/getInfiniteData'
-import { useLoaderData } from 'react-router-dom'
+import { getTVEndpoint } from '../utils/helpers'
 
 const tvQuery = ({ endpoint, searchQuery }) => ({
   queryKey: ['tvseries', searchQuery],
@@ -19,10 +20,8 @@ export const loader =
   queryClient =>
   async ({ request }) => {
     const url = new URL(request.url)
-    const searchQuery = url.searchParams.get('search')
-    const endpoint = searchQuery
-      ? `/search/tv?query==${searchQuery}`
-      : '/discover/tv?sort_by=popularity.desc'
+    const searchQuery = url.searchParams.get('search') ?? ''
+    const endpoint = getTVEndpoint({ searchQuery })
 
     const query = tvQuery({ endpoint, searchQuery })
 
@@ -42,9 +41,8 @@ const SeriesPage = () => {
   const [selectedGenres, setSelectedGenres] = useState([])
 
   const genresForUrl = useGenres(selectedGenres)
-  const endpoint = searchQuery
-    ? '/search/tv?query=' + searchQuery
-    : `/discover/tv?sort_by=popularity.desc&with_genres=${genresForUrl}`
+
+  const endpoint = getTVEndpoint({ genres: genresForUrl, searchQuery })
 
   const { data, status, isFetchingNextPage } = useFetchData(
     endpoint,
