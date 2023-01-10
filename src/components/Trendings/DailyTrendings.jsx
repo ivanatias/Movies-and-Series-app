@@ -6,9 +6,13 @@ import Error from '../Error/Error'
 import { getData } from '../../utils/getData'
 import { useQuery } from '@tanstack/react-query'
 
-const DailyTrendings = () => {
-  const { data, status } = useQuery(['trendingsdaily'], () =>
-    getData('/trending/all/day')
+const DailyTrendings = ({ initialData }) => {
+  const { data, status } = useQuery(
+    ['trendingsdaily'],
+    () => getData('/trending/all/day'),
+    {
+      initialData
+    }
   )
 
   return (

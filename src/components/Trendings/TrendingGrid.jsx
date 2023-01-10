@@ -6,9 +6,13 @@ import Error from '../Error/Error'
 import { getData } from '../../utils/getData'
 import { useQuery } from '@tanstack/react-query'
 
-const TrendingGrid = () => {
-  const { data, status } = useQuery(['trendingsweek'], () =>
-    getData('/trending/all/week')
+const TrendingGrid = ({ initialData }) => {
+  const { data, status } = useQuery(
+    ['trendingsweek'],
+    () => getData('/trending/all/week'),
+    {
+      initialData
+    }
   )
 
   return (

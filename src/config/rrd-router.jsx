@@ -2,7 +2,7 @@ import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { queryClient } from './react-query-config'
 import Layout from '../components/Layout/Layout'
-import LandingPage from '../pages/LandingPage'
+import LandingPage, { loader as trendingsLoader } from '../pages/LandingPage'
 import MoviesPage, { loader as moviesLoader } from '../pages/MoviesPage'
 import SeriesPage, { loader as tvLoader } from '../pages/SeriesPage'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
@@ -18,7 +18,8 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <LandingPage />
+            element: <LandingPage />,
+            loader: trendingsLoader(queryClient)
           },
           {
             path: 'movies',
