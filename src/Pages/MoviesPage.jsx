@@ -7,9 +7,8 @@ import Search from '../components/Search/Search'
 import Genres from '../components/Genres/Genres'
 import { useLoaderData } from 'react-router-dom'
 import { useInfiniteScroll } from '../hooks/useInfiniteScroll'
-import { useGenres } from '../hooks/useGenres'
 import { getInfiniteData } from '../utils/getInfiniteData'
-import { getMoviesEndpoint } from '../utils/helpers'
+import { getMoviesEndpoint, concatGenres } from '../utils/helpers'
 
 const moviesQuery = ({ endpoint, searchQuery }) => {
   return {
@@ -42,7 +41,7 @@ const MoviesPage = () => {
 
   const [selectedGenres, setSelectedGenres] = useState([])
 
-  const genresForUrl = useGenres(selectedGenres)
+  const genresForUrl = concatGenres(selectedGenres)
 
   const endpoint = getMoviesEndpoint({ genres: genresForUrl, searchQuery })
 

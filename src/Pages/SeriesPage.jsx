@@ -7,9 +7,8 @@ import Genres from '../components/Genres/Genres'
 import { Container } from 'react-bootstrap'
 import { useLoaderData } from 'react-router-dom'
 import { useInfiniteScroll } from '../hooks/useInfiniteScroll'
-import { useGenres } from '../hooks/useGenres'
 import { getInfiniteData } from '../utils/getInfiniteData'
-import { getTVEndpoint } from '../utils/helpers'
+import { getTVEndpoint, concatGenres } from '../utils/helpers'
 
 const tvQuery = ({ endpoint, searchQuery }) => ({
   queryKey: ['tvseries', searchQuery],
@@ -40,7 +39,7 @@ const SeriesPage = () => {
 
   const [selectedGenres, setSelectedGenres] = useState([])
 
-  const genresForUrl = useGenres(selectedGenres)
+  const genresForUrl = concatGenres(selectedGenres)
 
   const endpoint = getTVEndpoint({ genres: genresForUrl, searchQuery })
 

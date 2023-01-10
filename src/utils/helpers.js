@@ -38,10 +38,19 @@ const getTVEndpoint = ({ genres = '', searchQuery }) => {
   return `/search/tv?query=${searchQuery}`
 }
 
+const concatGenres = selectedGenres => {
+  if (selectedGenres.length === 0) return ''
+
+  return selectedGenres
+    .map(({ id }) => id)
+    .reduce((acc, curr) => acc + ',' + curr)
+}
+
 export {
   trimReleaseDate,
   pickRatingBadgeColor,
   trimRatingPoints,
   getMoviesEndpoint,
-  getTVEndpoint
+  getTVEndpoint,
+  concatGenres
 }
