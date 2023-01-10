@@ -26,9 +26,7 @@ export const loader =
 
     const query = moviesQuery({ endpoint, searchQuery })
 
-    const initialMovies =
-      queryClient.getQueryData(query.queryKey) ??
-      (await queryClient.fetchQuery(query))
+    const initialMovies = await queryClient.ensureQueryData(query)
 
     return {
       initialMovies,

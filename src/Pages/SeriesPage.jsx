@@ -24,9 +24,7 @@ export const loader =
 
     const query = tvQuery({ endpoint, searchQuery })
 
-    const initialTvSeries =
-      queryClient.getQueryData(query.queryKey) ??
-      (await queryClient.fetchQuery(query))
+    const initialTvSeries = await queryClient.ensureQueryData(query)
 
     return {
       initialTvSeries,

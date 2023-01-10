@@ -19,13 +19,12 @@ export const loader = queryClient => async () => {
   const dailyQuery = dailyTrendingsQuery()
   const weeklyQuery = weeklyTrendingsQuery()
 
-  const initialDaily =
-    queryClient.getQueryData(dailyQuery.queryKey) ??
-    (await queryClient.fetchQuery(dailyQuery))
+  const promises = [
+    queryClient.ensureQueryData(dailyQuery),
+    queryClient.ensureQueryData(weeklyQuery)
+  ]
 
-  const initialWeekly =
-    queryClient.getQueryData(weeklyQuery.queryKey) ??
-    (await queryClient.fetchQuery(weeklyQuery))
+  const [initialDaily, initialWeekly] = await Promise.all(promises)
 
   return {
     initialDaily,
