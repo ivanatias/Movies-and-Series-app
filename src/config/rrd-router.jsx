@@ -4,7 +4,7 @@ import { queryClient } from './react-query-config'
 import Layout from '../components/Layout/Layout'
 import LandingPage from '../pages/LandingPage'
 import MoviesPage, { loader as moviesLoader } from '../pages/MoviesPage'
-import SeriesPage from '../pages/SeriesPage'
+import SeriesPage, { loader as tvLoader } from '../pages/SeriesPage'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 
 const router = createBrowserRouter([
@@ -28,7 +28,8 @@ const router = createBrowserRouter([
 
           {
             path: 'tvseries',
-            element: <SeriesPage />
+            element: <SeriesPage />,
+            loader: tvLoader(queryClient)
           }
         ]
       }
