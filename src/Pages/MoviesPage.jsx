@@ -6,7 +6,7 @@ import Loading from '../components/Loading/Loading'
 import Search from '../components/Search/Search'
 import Genres from '../components/Genres/Genres'
 import { useLoaderData } from 'react-router-dom'
-import { useFetchData } from '../hooks/useFetchData'
+import { useInfiniteScroll } from '../hooks/useInfiniteScroll'
 import { useGenres } from '../hooks/useGenres'
 import { getInfiniteData } from '../utils/getInfiniteData'
 import { getMoviesEndpoint } from '../utils/helpers'
@@ -46,7 +46,7 @@ const MoviesPage = () => {
 
   const endpoint = getMoviesEndpoint({ genres: genresForUrl, searchQuery })
 
-  const { data, status, isFetchingNextPage } = useFetchData({
+  const { data, status, isFetchingNextPage } = useInfiniteScroll({
     endpoint,
     queryKey: ['movies', genresForUrl, searchQuery],
     initialData: initialMovies

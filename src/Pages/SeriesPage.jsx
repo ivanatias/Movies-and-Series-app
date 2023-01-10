@@ -6,7 +6,7 @@ import Search from '../components/Search/Search'
 import Genres from '../components/Genres/Genres'
 import { Container } from 'react-bootstrap'
 import { useLoaderData } from 'react-router-dom'
-import { useFetchData } from '../hooks/useFetchData'
+import { useInfiniteScroll } from '../hooks/useInfiniteScroll'
 import { useGenres } from '../hooks/useGenres'
 import { getInfiniteData } from '../utils/getInfiniteData'
 import { getTVEndpoint } from '../utils/helpers'
@@ -44,7 +44,7 @@ const SeriesPage = () => {
 
   const endpoint = getTVEndpoint({ genres: genresForUrl, searchQuery })
 
-  const { data, status, isFetchingNextPage } = useFetchData({
+  const { data, status, isFetchingNextPage } = useInfiniteScroll({
     endpoint,
     queryKey: ['tvseries', genresForUrl, searchQuery],
     initialData: initialTvSeries

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { getInfiniteData } from '../utils/getInfiniteData'
 
-export const useFetchData = ({ endpoint, queryKey, initialData }) => {
+export const useInfiniteScroll = ({ endpoint, queryKey, initialData }) => {
   const { data, status, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
     [...queryKey],
     ({ pageParam: page = 1, signal }) => {
