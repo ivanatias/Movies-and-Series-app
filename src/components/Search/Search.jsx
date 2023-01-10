@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Row, Col, Form as BsForm } from 'react-bootstrap'
 import { FaSearch } from 'react-icons/fa'
 import { Form } from 'react-router-dom'
 
 const Search = ({ type, initialSearchValue }) => {
+  const searchInputRef = useRef(null)
+
+  useEffect(() => {
+    searchInputRef.current.value = initialSearchValue
+  }, [initialSearchValue])
+
   return (
     <Row>
       <Col md={6} className='mx-auto mb-1'>
@@ -17,6 +23,7 @@ const Search = ({ type, initialSearchValue }) => {
             controlId={type === 'movie' ? 'Search Movie' : 'Search TV Serie'}
           >
             <BsForm.Control
+              ref={searchInputRef}
               name='search'
               type='text'
               placeholder={
