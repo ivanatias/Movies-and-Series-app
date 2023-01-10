@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, memo } from 'react'
 import { Row, Col, Form as BsForm } from 'react-bootstrap'
 import { FaSearch } from 'react-icons/fa'
 import { Form } from 'react-router-dom'
@@ -39,4 +39,4 @@ const Search = ({ type, initialSearchValue }) => {
   )
 }
 
-export default Search
+export default memo(Search)
