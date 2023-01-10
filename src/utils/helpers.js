@@ -39,7 +39,9 @@ const getTVEndpoint = ({ genres = '', searchQuery }) => {
 }
 
 const getDetailsEndpoint = ({ itemType, id }) => {
-  return itemType === 'movie' ? `/movie/${id}?` : `/tv/${id}?`
+  return itemType === 'movie'
+    ? `/movie/${id}?&append_to_response=videos,credits`
+    : `/tv/${id}?&append_to_response=videos,credits`
 }
 
 const concatGenres = selectedGenres => {
