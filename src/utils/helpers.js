@@ -54,6 +54,17 @@ const concatGenres = selectedGenres => {
     .reduce((acc, curr) => acc + ',' + curr)
 }
 
+const formatListFromArray = ({ array, fallback = 'No data available' }) => {
+  if (array.length === 0) return fallback
+
+  const formatter = new Intl.ListFormat('en', {
+    style: 'long',
+    type: 'conjunction'
+  })
+
+  return formatter.format(array)
+}
+
 export {
   API,
   trimReleaseDate,
@@ -62,5 +73,6 @@ export {
   getMoviesEndpoint,
   getTVEndpoint,
   getDetailsEndpoint,
+  formatListFromArray,
   concatGenres
 }

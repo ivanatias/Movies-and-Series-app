@@ -6,7 +6,7 @@ import Video from './Video'
 import { Row, Col } from 'react-bootstrap'
 import { useData } from '../../hooks/useData'
 import { getImage } from '../../utils/getImage'
-import { getDetailsEndpoint } from '../../utils/helpers'
+import { getDetailsEndpoint, formatListFromArray } from '../../utils/helpers'
 
 const Info = ({ item, itemType }) => {
   const imageUrl = getImage(item.poster_path, 500)
@@ -27,6 +27,21 @@ const Info = ({ item, itemType }) => {
 
   if (status === 'error') return <Error />
 
+  const genresList = formatListFromArray({
+    array: data.genres.map(genre => genre.name),
+    fallback: 'Unknown genres'
+  })
+
+  const productionCompaniesList = formatListFromArray({
+    array: data.production_companies.map(company => company.name),
+    fallback: 'Unknown companies'
+  })
+
+  const productionCountriesList = formatListFromArray({
+    array: data.production_countries.map(country => country.name),
+    fallback: 'Unknown countries'
+  })
+
   return (
     <>
       <Row className='g-3 mx-auto'>
@@ -46,35 +61,20 @@ const Info = ({ item, itemType }) => {
             {data.overview ?? 'No description available'}
           </p>
           <p className='text-white'>
-            <strong>Genres:</strong>{' '}
-            {data.genres.length !== 0
-              ? data.genres.map(genre => genre.name).join(', ')
-              : 'Unknown Genres'}
+            <strong>Genres:</strong> {genresList}
           </p>
           <p className='text-white'>
             <strong>Original Language:</strong>{' '}
-            {data.original_language.length !== 0
-              ? data.original_language.toUpperCase()
-              : 'Unknown'}
+            {data.original_language.toUpperCase() ?? 'Unknown'}
           </p>
           <p className='text-white'>
             <strong>Status:</strong> {data.status ?? 'Unknown'}
           </p>
           <p className='text-white'>
-            <strong>Production Companies:</strong>{' '}
-            {data.production_companies.length !== 0
-              ? data.production_companies
-                  .map(companie => companie.name)
-                  .join(', ')
-              : 'No information available'}
+            <strong>Production Companies:</strong> {productionCompaniesList}
           </p>
           <p className='text-white'>
-            <strong>Production Countries:</strong>{' '}
-            {data.production_countries.length !== 0
-              ? data.production_countries
-                  .map(country => country.name)
-                  .join(', ')
-              : 'No information available'}
+            <strong>Production Countries:</strong> {productionCountriesList}
           </p>
         </Col>
       </Row>
