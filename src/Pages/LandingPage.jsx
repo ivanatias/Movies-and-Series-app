@@ -7,12 +7,12 @@ import { getData } from '../utils/getData'
 
 const dailyTrendingsQuery = () => ({
   queryKey: ['trendingsdaily'],
-  queryFn: () => getData('/trending/all/day')
+  queryFn: () => getData({ endpoint: '/trending/all/day' })
 })
 
 const weeklyTrendingsQuery = () => ({
   queryKey: ['trendingsweek'],
-  queryFn: () => getData('/trending/all/week')
+  queryFn: () => getData({ endpoint: '/trending/all/week' })
 })
 
 export const loader = queryClient => async () => {
