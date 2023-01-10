@@ -1,6 +1,5 @@
 import axios from 'axios'
-
-const API = 'https://api.themoviedb.org/3'
+import { API } from './helpers'
 
 export const getInfiniteData = async ({ endpoint, page, signal }) => {
   const { data } = await axios.get(API + endpoint + '&page=' + page, {
