@@ -31,31 +31,28 @@ const Genres = ({ type, selectedGenres, setSelectedGenres }) => {
 
   return (
     <div className='mb-3'>
-      {selectedGenres &&
-        selectedGenres.map(genre => (
-          <Badge
-            bg='danger'
-            className='genres-badge me-1 mb-2'
-            key={genre.id}
-            onClick={() => handleRemove(genre)}
-          >
-            {genre.name}
-            <FaTimes className='ms-1' />
-          </Badge>
-        ))}
+      {selectedGenres.map(genre => (
+        <Badge
+          bg='danger'
+          className='genres-badge me-1 mb-2'
+          key={genre.id}
+          onClick={() => handleRemove(genre)}
+        >
+          {genre.name}
+          <FaTimes className='ms-1' />
+        </Badge>
+      ))}
 
-      {genres
-        ? genres.map(genre => (
-            <Badge
-              key={genre.id}
-              className='genres-badge me-1 mb-2'
-              bg='secondary'
-              onClick={() => handleAdd(genre)}
-            >
-              {genre.name}
-            </Badge>
-          ))
-        : null}
+      {genres.map(genre => (
+        <Badge
+          key={genre.id}
+          className='genres-badge me-1 mb-2'
+          bg='secondary'
+          onClick={() => handleAdd(genre)}
+        >
+          {genre.name}
+        </Badge>
+      ))}
     </div>
   )
 }
