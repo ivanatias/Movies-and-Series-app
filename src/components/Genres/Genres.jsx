@@ -9,7 +9,7 @@ const Genres = ({ type, selectedGenres, setSelectedGenres }) => {
   useEffect(() => {
     let isMounted = true
 
-    getData(`/genre/${type}/list`).then(data => {
+    getData({ endpoint: `/genre/${type}/list` }).then(data => {
       if (isMounted) setGenres(data.genres)
     })
 
