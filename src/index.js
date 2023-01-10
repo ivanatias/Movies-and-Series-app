@@ -12,8 +12,10 @@ import './bootstrap.min.css'
 const root = createRoot(document.getElementById('root'))
 
 root.render(
-  <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
-    <ReactQueryDevtools />
-  </QueryClientProvider>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  </React.StrictMode>
 )
