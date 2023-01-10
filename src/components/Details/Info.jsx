@@ -6,12 +6,14 @@ import Video from './Video'
 import { Row, Col } from 'react-bootstrap'
 import { useFetchDetails } from '../../hooks/useFetchDetails'
 import { getImage } from '../../utils/getImage'
+import { getDetailsEndpoint } from '../../utils/helpers'
+
+// TODO: Fetch everything from the item (cast, videos, etc) in one single API call.
 
 const Info = ({ item, itemType }) => {
   const imageUrl = getImage(item.poster_path, 500)
 
-  const endpoint =
-    itemType === 'movie' ? `/movie/${item.id}?` : `/tv/${item.id}?`
+  const endpoint = getDetailsEndpoint({ itemType, id: item.id })
 
   const { data, status } = useFetchDetails(endpoint, 'details', item.id)
 
