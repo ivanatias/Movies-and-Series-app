@@ -1,47 +1,31 @@
-import React, { useEffect } from 'react'
-import { Row, Col, Form } from 'react-bootstrap'
+import React from 'react'
+import { Row, Col, Form as BsForm } from 'react-bootstrap'
 import { FaSearch } from 'react-icons/fa'
-import { useSearchParams } from 'react-router-dom'
+import { Form } from 'react-router-dom'
 
-const Search = ({ type }) => {
-  const [, setSearchParams] = useSearchParams()
-
-  useEffect(() => {
-    const params = new URLSearchParams()
-    if (params.get('search') === null) setSearchParams({})
-  }, [])
-
-  const handleSubmit = e => {
-    e.preventDefault()
-  }
-
-  const handleSearch = ({ target }) => {
-    target.value === ''
-      ? setSearchParams({})
-      : setSearchParams({ search: target.value })
-  }
-
+const Search = ({ type, initialSearchValue }) => {
   return (
     <Row>
       <Col md={6} className='mx-auto mb-1'>
-        <Form onSubmit={handleSubmit} className='position-relative'>
+        <Form id='search-form' role='search' className='position-relative'>
           <FaSearch
             className='position-absolute top-50 end-0 translate-middle text-dark'
             size='20'
           />
-          <Form.Group
+          <BsForm.Group
             className='mb-3'
             controlId={type === 'movie' ? 'Search Movie' : 'Search TV Serie'}
           >
-            <Form.Control
+            <BsForm.Control
+              name='search'
               type='text'
               placeholder={
                 type === 'movie' ? 'Search Movie' : 'Search TV Serie'
               }
-              onChange={handleSearch}
               aria-label={type === 'movie' ? 'Search Movie' : 'Search TV Serie'}
+              defaultValue={initialSearchValue}
             />
-          </Form.Group>
+          </BsForm.Group>
         </Form>
       </Col>
     </Row>
