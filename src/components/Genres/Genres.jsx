@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import Badge from 'react-bootstrap/Badge'
 import { getData } from '../../utils/getData'
 import { FaTimes } from 'react-icons/fa'
@@ -57,4 +57,4 @@ const Genres = ({ type, selectedGenres, setSelectedGenres }) => {
   )
 }
 
-export default Genres
+export default memo(Genres)
