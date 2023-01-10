@@ -1,6 +1,6 @@
 import React from 'react'
 import Banner from '../components/Banner/Banner'
-import TrendingGrid from '../components/Trendings/TrendingGrid'
+import WeeklyTrendings from '../components/Trendings/WeeklyTrendings'
 import DailyTrendings from '../components/Trendings/DailyTrendings'
 import { useLoaderData } from 'react-router-dom'
 import { getData } from '../utils/getData'
@@ -37,7 +37,7 @@ const LandingPage = () => {
   return (
     <>
       <Banner />
-      <TrendingGrid initialData={initialWeekly} />
+      <WeeklyTrendings initialData={initialWeekly} />
       <DailyTrendings initialData={initialDaily} />
     </>
   )

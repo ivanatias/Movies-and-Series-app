@@ -3,7 +3,7 @@ import Grid from '../Grid/Grid'
 import { Container } from 'react-bootstrap'
 import { useData } from '../../hooks/useData'
 
-const TrendingGrid = ({ initialData }) => {
+const WeeklyTrendings = ({ initialData }) => {
   const { data } = useData({
     endpoint: '/trending/all/week',
     queryKey: ['trendingsweek'],
@@ -18,4 +18,4 @@ const TrendingGrid = ({ initialData }) => {
   )
 }
 
-export default TrendingGrid
+export default WeeklyTrendings
