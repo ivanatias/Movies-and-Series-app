@@ -22,4 +22,17 @@ const pickRatingBadgeColor = votePoints => {
   }
 }
 
-export { trimReleaseDate, pickRatingBadgeColor, trimRatingPoints }
+const getMoviesEndpoint = ({ genres = '', searchQuery }) => {
+  if (!searchQuery) {
+    return `/discover/movie?sort_by=popularity.desc&with_genres=${genres}`
+  }
+
+  return `/search/movie?query=${searchQuery}`
+}
+
+export {
+  trimReleaseDate,
+  pickRatingBadgeColor,
+  trimRatingPoints,
+  getMoviesEndpoint
+}

@@ -9,6 +9,7 @@ import { useLoaderData } from 'react-router-dom'
 import { useFetchData } from '../hooks/useFetchData'
 import { useGenres } from '../hooks/useGenres'
 import { getInfiniteData } from '../utils/getInfiniteData'
+import { getMoviesEndpoint } from '../utils/helpers'
 
 const moviesQuery = ({ endpoint, searchQuery }) => {
   return {
@@ -21,10 +22,8 @@ export const loader =
   queryClient =>
   async ({ request }) => {
     const url = new URL(request.url)
-    const searchQuery = url.searchParams.get('search')
-    const endpoint = searchQuery
-      ? `/search/movie?query=${searchQuery}`
-      : '/discover/movie?sort_by=popularity.desc'
+    const searchQuery = url.searchParams.get('search') ?? ''
+    const endpoint = getMoviesEndpoint({ searchQuery })
 
     const query = moviesQuery({ endpoint, searchQuery })
 
@@ -45,9 +44,7 @@ const MoviesPage = () => {
 
   const genresForUrl = useGenres(selectedGenres)
 
-  const endpoint = searchQuery
-    ? '/search/movie?query=' + searchQuery
-    : `/discover/movie?sort_by=popularity.desc&with_genres=${genresForUrl}`
+  const endpoint = getMoviesEndpoint({ genres: genresForUrl, searchQuery })
 
   const { data, status, isFetchingNextPage } = useFetchData(
     endpoint,
