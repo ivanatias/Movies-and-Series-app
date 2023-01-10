@@ -46,13 +46,11 @@ const MoviesPage = () => {
 
   const endpoint = getMoviesEndpoint({ genres: genresForUrl, searchQuery })
 
-  const { data, status, isFetchingNextPage } = useFetchData(
+  const { data, status, isFetchingNextPage } = useFetchData({
     endpoint,
-    'movies',
-    searchQuery,
-    genresForUrl,
-    initialMovies
-  )
+    queryKey: ['movies', genresForUrl, searchQuery],
+    initialData: initialMovies
+  })
 
   return (
     <Container className='py-5'>

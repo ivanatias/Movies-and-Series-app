@@ -2,15 +2,9 @@ import { useEffect } from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { getInfiniteData } from '../utils/getInfiniteData'
 
-export const useFetchData = (
-  endpoint,
-  queryKey,
-  query1,
-  query2,
-  initialData
-) => {
+export const useFetchData = ({ endpoint, queryKey, initialData }) => {
   const { data, status, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
-    [`${queryKey}`, query1, query2],
+    [...queryKey],
     ({ pageParam: page = 1, signal }) => {
       return getInfiniteData({ endpoint, page, signal })
     },

@@ -44,13 +44,11 @@ const SeriesPage = () => {
 
   const endpoint = getTVEndpoint({ genres: genresForUrl, searchQuery })
 
-  const { data, status, isFetchingNextPage } = useFetchData(
+  const { data, status, isFetchingNextPage } = useFetchData({
     endpoint,
-    'tvseries',
-    searchQuery,
-    genresForUrl,
-    initialTvSeries
-  )
+    queryKey: ['tvseries', genresForUrl, searchQuery],
+    initialData: initialTvSeries
+  })
 
   return (
     <Container className='py-5'>
