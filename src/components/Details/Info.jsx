@@ -4,31 +4,37 @@ import Error from '../Error/Error'
 import Cast from './Cast'
 import Video from './Video'
 import { Row, Col } from 'react-bootstrap'
-import { useFetchDetails } from '../../hooks/useFetchDetails'
+import { useData } from '../../hooks/useData'
 import { getImage } from '../../utils/getImage'
 import { getDetailsEndpoint } from '../../utils/helpers'
-
-// TODO: Fetch everything from the item (cast, videos, etc) in one single API call.
 
 const Info = ({ item, itemType }) => {
   const imageUrl = getImage(item.poster_path, 500)
 
   const endpoint = getDetailsEndpoint({ itemType, id: item.id })
 
-  const { data, status } = useFetchDetails(endpoint, 'details', item.id)
+  const { data, status } = useData({ endpoint, queryKey: ['details', item.id] })
 
-  return status === 'loading' ? (
-    <Loading />
-  ) : status === 'error' ? (
-    <Error />
-  ) : data ? (
+  if (!data && status !== 'loading') {
+    return (
+      <div className='d-flex justify-content-center text-white lead m-5'>
+        Sorry, nothing to show about this
+      </div>
+    )
+  }
+
+  if (status === 'loading') return <Loading />
+
+  if (status === 'error') return <Error />
+
+  return (
     <>
       <Row className='g-3 mx-auto'>
         <Col md={6}>
           <div className='d-flex justify-content-center'>
             <img
               src={imageUrl}
-              alt={data.title || data.name}
+              alt={data.title ?? data.name}
               className='img-fluid rounded'
               width={500}
             />
@@ -37,7 +43,7 @@ const Info = ({ item, itemType }) => {
         <Col md={6}>
           <p className='text-white'>
             <strong>Description:</strong>{' '}
-            {data.overview ? data.overview : 'No description available'}
+            {data.overview ?? 'No description available'}
           </p>
           <p className='text-white'>
             <strong>Genres:</strong>{' '}
@@ -52,7 +58,7 @@ const Info = ({ item, itemType }) => {
               : 'Unknown'}
           </p>
           <p className='text-white'>
-            <strong>Status:</strong> {data.status ? data.status : 'Unknown'}
+            <strong>Status:</strong> {data.status ?? 'Unknown'}
           </p>
           <p className='text-white'>
             <strong>Production Companies:</strong>{' '}
@@ -75,19 +81,15 @@ const Info = ({ item, itemType }) => {
       <Row className='g-3 mx-auto pt-5'>
         <h3 className='text-center'>Cast:</h3>
         <Col>
-          <Cast id={item.id} itemType={itemType} />
+          <Cast cast={data.credits.cast} />
         </Col>
       </Row>
       <Row className='g-3 mx-auto pt-5'>
         <Col>
-          <Video id={item.id} itemType={itemType} />
+          <Video video={data.videos.results[0]} />
         </Col>
       </Row>
     </>
-  ) : (
-    <div className='d-flex justify-content-center text-white lead m-5'>
-      Sorry, nothing to show about this
-    </div>
   )
 }
 
