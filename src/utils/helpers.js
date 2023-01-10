@@ -1,3 +1,5 @@
+const API = 'https://api.themoviedb.org/3'
+
 const trimReleaseDate = date => {
   return date ? date.substring(0, 4) : 'No date available'
 }
@@ -53,6 +55,7 @@ const concatGenres = selectedGenres => {
 }
 
 export {
+  API,
   trimReleaseDate,
   pickRatingBadgeColor,
   trimRatingPoints,
