@@ -28,7 +28,6 @@ export const useInfiniteScroll = ({ endpoint, queryKey, initialData }) => {
 
     document.addEventListener('scroll', onScroll)
     return () => document.removeEventListener('scroll', onScroll)
-    // eslint-disable-next-line
   }, [])
 
   return { data, status, isFetchingNextPage }

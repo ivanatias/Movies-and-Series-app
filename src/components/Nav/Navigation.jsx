@@ -27,7 +27,6 @@ const Navigation = () => {
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize)
     return () => window.removeEventListener('resize', handleWindowResize)
-    // eslint-disable-next-line
   }, [])
 
   const toggleMenu = () => setMenuOpen(!menuOpen)

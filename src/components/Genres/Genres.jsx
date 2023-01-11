@@ -16,7 +16,6 @@ const Genres = ({ type, selectedGenres, setSelectedGenres }) => {
     return () => {
       isMounted = false
     }
-    // eslint-disable-next-line
   }, [])
 
   const handleAdd = genre => {
