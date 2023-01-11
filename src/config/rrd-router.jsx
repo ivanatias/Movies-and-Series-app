@@ -2,11 +2,11 @@ import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { queryClient } from './react-query-config'
 import Layout from '../components/Layout/Layout'
-import LandingPage, { loader as trendingsLoader } from '../pages/LandingPage'
-import MoviesPage, { loader as moviesLoader } from '../pages/MoviesPage'
-import SeriesPage, { loader as tvLoader } from '../pages/SeriesPage'
-import ErrorPage from '../pages/ErrorPage'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
+import LandingPage, { loader as trendingsLoader } from '../views/LandingPage'
+import MoviesPage, { loader as moviesLoader } from '../views/MoviesPage'
+import SeriesPage, { loader as tvLoader } from '../views/SeriesPage'
+import ErrorPage from '../views/ErrorPage'
 
 const router = createBrowserRouter([
   {
