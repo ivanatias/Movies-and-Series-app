@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { Container, Navbar, Nav } from 'react-bootstrap'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import './Navigation.css'
@@ -44,23 +44,27 @@ const Navigation = () => {
           )}
           {menuOpen || screenWidth >= 992 ? (
             <Nav className='nav-menu'>
-              <Link to='/' className='nav nav-link' onClick={closeMobileMenu}>
+              <NavLink
+                to='/'
+                className='nav nav-link'
+                onClick={closeMobileMenu}
+              >
                 Trendings
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to='/movies'
                 className='nav nav-link'
                 onClick={closeMobileMenu}
               >
                 Movies
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to='/tvseries'
                 className='nav nav-link'
                 onClick={closeMobileMenu}
               >
                 TV Series
-              </Link>
+              </NavLink>
             </Nav>
           ) : null}
         </div>
