@@ -5,12 +5,13 @@ import Layout from '../components/Layout/Layout'
 import LandingPage, { loader as trendingsLoader } from '../pages/LandingPage'
 import MoviesPage, { loader as moviesLoader } from '../pages/MoviesPage'
 import SeriesPage, { loader as tvLoader } from '../pages/SeriesPage'
+import ErrorPage from '../pages/ErrorPage'
 import ScrollToTop from '../components/ScrollToTop/ScrollToTop'
 
 const router = createBrowserRouter([
   {
-    path: '/',
     element: <ScrollToTop />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '/',
