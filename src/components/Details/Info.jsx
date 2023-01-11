@@ -7,6 +7,7 @@ import { Row, Col } from 'react-bootstrap'
 import { useData } from '../../hooks/useData'
 import { getImage } from '../../utils/getImage'
 import { getDetailsEndpoint, formatListFromArray } from '../../utils/helpers'
+import placeholder from '../../images/movieplaceholder.png'
 
 const Info = ({ item, itemType }) => {
   const imageUrl = getImage(item.poster_path, 500)
@@ -48,7 +49,7 @@ const Info = ({ item, itemType }) => {
         <Col md={6}>
           <div className='d-flex justify-content-center'>
             <img
-              src={imageUrl}
+              src={imageUrl ?? placeholder}
               alt={data.title ?? data.name}
               className='img-fluid rounded'
               width={500}
