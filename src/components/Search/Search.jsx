@@ -24,6 +24,7 @@ const Search = ({ type, initialSearchValue }) => {
               searching ? 'text-danger' : 'text-dark'
             }`}
             size='20'
+            aria-hidden
           />
           <BsForm.Group
             className='mb-3'
