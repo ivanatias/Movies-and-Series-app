@@ -1,8 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import NavigationLink from './NavigationLink'
+import { Link } from 'react-router-dom'
 import { Container, Navbar, Nav } from 'react-bootstrap'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import './Navigation.css'
+
+const PATHS = [
+  {
+    label: 'Trendings',
+    path: '/'
+  },
+  {
+    label: 'Movies',
+    path: '/movies'
+  },
+  {
+    label: 'TV Series',
+    path: '/tvseries'
+  }
+]
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -44,27 +60,11 @@ const Navigation = () => {
           )}
           {menuOpen || screenWidth >= 992 ? (
             <Nav className='nav-menu'>
-              <NavLink
-                to='/'
-                className='nav nav-link'
-                onClick={closeMobileMenu}
-              >
-                Trendings
-              </NavLink>
-              <NavLink
-                to='/movies'
-                className='nav nav-link'
-                onClick={closeMobileMenu}
-              >
-                Movies
-              </NavLink>
-              <NavLink
-                to='/tvseries'
-                className='nav nav-link'
-                onClick={closeMobileMenu}
-              >
-                TV Series
-              </NavLink>
+              {PATHS.map(({ label, path }) => (
+                <NavigationLink to={path} key={label} onClick={closeMobileMenu}>
+                  {label}
+                </NavigationLink>
+              ))}
             </Nav>
           ) : null}
         </div>
